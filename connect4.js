@@ -30,8 +30,8 @@ function makeBoard() {
 
 function makeHtmlBoard() {
 	// TODO: get "htmlBoard" variable from the item in HTML w/ID of "board"
-
-	// TODO: add comment for this code
+	const htmlBoard = document.querySelector("#board");
+	// This portion creates the top row and adds click functionality
 	let top = document.createElement("tr");
 	top.setAttribute("id", "column-top");
 	top.addEventListener("click", handleClick);
@@ -43,7 +43,7 @@ function makeHtmlBoard() {
 	}
 	htmlBoard.append(top);
 
-	// TODO: add comment for this code
+	//This portion adds rows and columns below the top row for the grid
 	for (let y = 0; y < HEIGHT; y++) {
 		const row = document.createElement("tr");
 		for (let x = 0; x < WIDTH; x++) {
@@ -110,37 +110,17 @@ function checkForWin() {
 		//  - cells: list of four (y, x) cells
 		//  - returns true if all are legal coordinates & all match currPlayer
 
-		return cells.every(([y, x]) => y >= 0 && y < HEIGHT && x >= 0 && x < WIDTH && board[y][x] === currPlayer);
+		return cells.every(([ y, x ]) => y >= 0 && y < HEIGHT && x >= 0 && x < WIDTH && board[y][x] === currPlayer);
 	}
 
 	// TODO: read and understand this code. Add comments to help you.
 
 	for (let y = 0; y < HEIGHT; y++) {
 		for (let x = 0; x < WIDTH; x++) {
-			let horiz = [
-				[y, x],
-				[y, x + 1],
-				[y, x + 2],
-				[y, x + 3]
-			];
-			let vert = [
-				[y, x],
-				[y + 1, x],
-				[y + 2, x],
-				[y + 3, x]
-			];
-			let diagDR = [
-				[y, x],
-				[y + 1, x + 1],
-				[y + 2, x + 2],
-				[y + 3, x + 3]
-			];
-			let diagDL = [
-				[y, x],
-				[y + 1, x - 1],
-				[y + 2, x - 2],
-				[y + 3, x - 3]
-			];
+			let horiz = [ [ y, x ], [ y, x + 1 ], [ y, x + 2 ], [ y, x + 3 ] ];
+			let vert = [ [ y, x ], [ y + 1, x ], [ y + 2, x ], [ y + 3, x ] ];
+			let diagDR = [ [ y, x ], [ y + 1, x + 1 ], [ y + 2, x + 2 ], [ y + 3, x + 3 ] ];
+			let diagDL = [ [ y, x ], [ y + 1, x - 1 ], [ y + 2, x - 2 ], [ y + 3, x - 3 ] ];
 
 			if (_win(horiz) || _win(vert) || _win(diagDR) || _win(diagDL)) {
 				return true;
