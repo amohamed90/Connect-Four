@@ -59,13 +59,19 @@ function makeHtmlBoard() {
 
 function findSpotForCol(x) {
 	// TODO: write the real version of this, rather than always returning 0
-	return 0;
+	return board.length - 1;
 }
 
 /** placeInTable: update DOM to place piece into HTML table of board */
 
 function placeInTable(y, x) {
 	// TODO: make a div and insert into correct table cell
+	let div = document.createElement("div");
+	div.classList.add("piece");
+	div.classList.add(`p${currPlayer}`);
+
+	let square = document.getElementById(`${y}-${x}`);
+	square.append(div);
 }
 
 /** endGame: announce game end */
