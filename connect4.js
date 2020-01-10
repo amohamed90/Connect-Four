@@ -16,7 +16,7 @@ let board = []; // array of rows, each row is array of cells  (board[y][x])
  */
 
 function makeBoard() {
-	// TODO: set "board" to empty HEIGHT x WIDTH matrix array
+	//  set "board" to empty HEIGHT x WIDTH matrix array
 	for (let h = 0; h < HEIGHT; h++) {
 		let inner = [];
 		for (let w = 0; w < WIDTH; w++) {
@@ -29,7 +29,7 @@ function makeBoard() {
 /** makeHtmlBoard: make HTML table and row of column tops. */
 
 function makeHtmlBoard() {
-	// TODO: get "htmlBoard" variable from the item in HTML w/ID of "board"
+	// get "htmlBoard" variable from the item in HTML w/ID of "board"
 	const htmlBoard = document.querySelector("#board");
 	// This portion creates the top row and adds click functionality
 	let top = document.createElement("tr");
@@ -58,14 +58,19 @@ function makeHtmlBoard() {
 /** findSpotForCol: given column x, return top empty y (null if filled) */
 
 function findSpotForCol(x) {
-	// TODO: write the real version of this, rather than always returning 0
-	return board.length - 1;
+	let y = HEIGHT - 1;
+
+	for (let y = board.length - 1; y >= 0; y--) {
+		if (board[y][x] === null) {
+			return y;
+		} 
+	}
+	return null;
 }
 
 /** placeInTable: update DOM to place piece into HTML table of board */
 
 function placeInTable(y, x) {
-	// TODO: make a div and insert into correct table cell
 	let div = document.createElement("div");
 	div.classList.add("piece");
 	div.classList.add(`p${currPlayer}`);
@@ -77,7 +82,7 @@ function placeInTable(y, x) {
 /** endGame: announce game end */
 
 function endGame(msg) {
-	// TODO: pop up alert message
+	alert(msg);
 }
 
 /** handleClick: handle click of column top to play piece */
@@ -93,7 +98,10 @@ function handleClick(evt) {
 	}
 
 	// place piece in board and add to HTML table
-	// TODO: add line to update in-memory board
+	//Update in-memory board
+	console.log("COORDINATES: ", y, x);
+	board[y][x] = currPlayer;
+
 	placeInTable(y, x);
 
 	// check for win
@@ -102,10 +110,13 @@ function handleClick(evt) {
 	}
 
 	// check for tie
-	// TODO: check if all cells in board are filled; if so call, call endGame
-
+	if (board.flat().every((slot) => slot !== null)) {
+		endGame("gameOver!!!");
+	}
 	// switch players
-	// TODO: switch currPlayer 1 <-> 2
+	currPlayer = currPlayer === 1 ? 2 : 1;
+
+
 }
 
 /** checkForWin: check board cell-by-cell for "does a win start here?" */
