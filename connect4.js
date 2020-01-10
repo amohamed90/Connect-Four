@@ -63,7 +63,7 @@ function findSpotForCol(x) {
 	for (let y = board.length - 1; y >= 0; y--) {
 		if (board[y][x] === null) {
 			return y;
-		} 
+		}
 	}
 	return null;
 }
@@ -106,7 +106,9 @@ function handleClick(evt) {
 
 	// check for win
 	if (checkForWin()) {
-		return endGame(`Player ${currPlayer} won!`);
+		setTimeout(function() {
+			return endGame(`Player ${currPlayer} won!`);
+		}, 0);
 	}
 
 	// check for tie
@@ -130,7 +132,7 @@ function checkForWin() {
 		return cells.every(([ y, x ]) => y >= 0 && y < HEIGHT && x >= 0 && x < WIDTH && board[y][x] === currPlayer);
 	}
 
-	// TODO: read and understand this code. Add comments to help you.
+	// checks across the entire board to detremine if the current player formed 4 consecutive pieces. If so, current player is the winner.
 
 	for (let y = 0; y < HEIGHT; y++) {
 		for (let x = 0; x < WIDTH; x++) {
